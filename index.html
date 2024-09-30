@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>虹のクイズ</title>
+    <meta name="description" content="虹の七色に関する問題です">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <h2>問題：虹の七色をすべて答えなさい</h2>
+    <form name="colorForm">
+      <input type="text" name="textBox">
+    </form>
+    <button id="color-btn">解答する</button><br>
+    <span id="message">当てはまると思う色を一色ずつ答えてください。七色すべて答えられたらクリアです。</span>
+
+    <div id="rainbow">
+      <div id="red"><div id="red2"></div></div>
+      <div id="orange"><div id="orange2"></div></div>
+      <div id="yellow"><div id="yellow2"></div></div>
+      <div id="green"><div id="green2"></div></div>
+      <div id="blue"><div id="blue2"></div></div>
+      <div id="indigo"><div id="indigo2"></div></div>
+      <div id="purple"><div id="purple2"><h1 id="clearmessage">Congratulations！！！</h1></div></div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

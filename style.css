@@ -1,0 +1,143 @@
+html,body {
+  overflow: hidden;
+}
+
+body {
+  text-align: center;
+  background-color: lightskyblue;
+  width: 100%;
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+#rainbow {
+  position: relative;
+  width: 100%;
+  height: 1000px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.trueRed {
+  background-color: red;
+  position: absolute;
+  top: 0;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.coverRed {
+  background-color: lightskyblue;
+  position: absolute;
+  top: 30px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.trueOrange {
+  background-color: orange;
+  position: absolute;
+  top: 30px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.coverOrange {
+  background-color: lightskyblue;
+  position: absolute;
+  top: 30px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.trueYellow {
+  background-color: yellow;
+  position: absolute;
+  top: 60px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.coverYellow {
+  background-color: lightskyblue;
+  position: absolute;
+  top: 30px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.trueGreen {
+  background-color: green;
+  position: absolute;
+  top: 90px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.coverGreen {
+  background-color: lightskyblue;
+  position: absolute;
+  top: 30px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.trueBlue {
+  background-color: blue;
+  position: absolute;
+  top: 120px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.coverBlue {
+  background-color: lightskyblue;
+  position: absolute;
+  top: 30px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.trueIndigo {
+  background-color: indigo;
+  position: absolute;
+  top: 150px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.coverIndigo {
+  background-color: lightskyblue;
+  position: absolute;
+  top: 30px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.truePurple {
+  background-color: purple;
+  position: absolute;
+  top: 180px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+.coverPurple {
+  background-color: lightskyblue;
+  position: absolute;
+  top: 30px;
+  border-radius: 50% / 100% 100% 0 0;
+  width: 100%;
+  height: 800px;
+}
+
+#clearmessage {
+  color: red;
+  display: none;
+  font-size: 50px;
+  position: relative;
+  top: 200px;
+}
