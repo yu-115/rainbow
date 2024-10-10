@@ -1,152 +1,119 @@
-const btn = document.getElementById('color-btn');
-const message = document.getElementById('message');
-const clearMessage = document.getElementById('clearmessage')
-const clearRed = document.getElementById('red');
-const coverRed = document.getElementById('red2');
-const clearOrange = document.getElementById('orange');
-const coverOrange = document.getElementById('orange2');
-const clearYellow = document.getElementById('yellow');
-const coverYellow = document.getElementById('yellow2');
-const clearGreen = document.getElementById('green');
-const coverGreen = document.getElementById('green2');
-const clearBlue = document.getElementById('blue');
-const coverBlue = document.getElementById('blue2');
-const clearIndigo = document.getElementById('indigo');
-const coverIndigo = document.getElementById('indigo2');
-const clearPurple = document.getElementById('purple');
-const coverPurple = document.getElementById('purple2');
+$(function () {
+  //colorsオブジェクトを作成し、七色の各色をキーとし、別名を値として設定する
+  const colors = {
+    "赤": ["赤", "あか", "赤色", "あかいろ", "レッド", "red", "Red", "RED"],
+    "橙": ["橙", "だいだい", "橙色", "だいだいいろ", "オレンジ", "orange", "Orange", "ORANGE"],
+    "黄": ["黄", "き", "黄色", "きいろ", "イエロー", "yellow", "Yellow", "YELLOW"],
+    "緑": ["緑", "みどり", "緑色", "みどりいろ", "グリーン", "green", "Green", "GREEN"],
+    "青": ["青", "あお", "青色", "あおいろ", "ブルー", "blue", "Blue", "BLUE"],
+    "藍": ["藍", "あい", "藍色", "あいいろ", "インディゴ", "indigo", "Indigo", "INDIGO"],
+    "紫": ["紫", "むらさき", "紫色", "むらさきいろ", "パープル", "purple", "Purple", "PURPLE"]
+  };
 
-const answer = ['赤', '橙', '黄', '緑', '青', '藍', '紫'];
-const nearRed = ['あか','あかいろ', '赤色', 'red', 'Red', 'RED', 'レッド'];
-const nearOrange = ['だいだい', 'だいだいいろ', '橙色', 'orange', 'Orange', 'ORANGE', 'オレンジ'];
-const nearYellow = ['き', 'きいろ', '黄色', 'yellow', 'Yellow', 'YELLOW', 'イエロー'];
-const nearGreen = ['みどり', 'みどりいろ', '緑色', 'green', 'Green', 'GREEN', 'グリーン'];
-const nearBlue = ['あお', 'あおいろ', '青色', 'blue', 'Blue', 'BLUE', 'ブルー'];
-const nearIndigo = ['あい', 'あいいろ', '藍色', 'indigo', 'Indigo', 'INDIGO', 'インディゴ'];
-const nearPurple = ['むらさき', 'むらさきいろ', '紫色', 'purple', 'Purple', 'PURPLE', 'パープル'];
-let textPool = [];
+  //解答した色を保管しておく変数textPoolを宣言
+  let textPool = [];
 
-//ボタンを押すとイベント処理
-btn.addEventListener('click', () => {
-//入力内容に応じて虹を描画する関数を定義
-const drowRainbow = () => {
-  switch (text) {
-    case '赤':
-      clearRed.classList.add('trueRed');
-      coverRed.classList.add('coverRed');
+  //残りの色数で処理を分岐する関数を定義
+  const colorCount = () => {
+    switch (textPool.length) {
+    case 1:
+      $('#countmessage').text('残り6色です。まだまだ始まったばかり');
+       break;
+    case 2:
+       $('#countmessage').text('残り5色です。この調子でいきましょう');
+       break;
+    case 3:
+       $('#countmessage').text('残り4色です。半分正解までもう少し');
       break;
-    case '橙':
-      clearOrange.classList.add('trueOrange');
-      coverOrange.classList.add('coverOrange');
+    case 4:
+      $('#countmessage').text('残り3色です。折り返し地点を超えましたね！');
       break;
-    case '黄':
-      clearYellow.classList.add('trueYellow');
-      coverYellow.classList.add('coverYellow');
+    case 5:
+      $('#countmessage').text('残り2色です。そろそろ難しくなる頃合いです・・・');
       break;
-    case '緑':
-      clearGreen.classList.add('trueGreen');
-      coverGreen.classList.add('coverGreen');
+    case 6:
+      $('#countmessage').text('残り1色です。ここまで来たらあと一息、がんばりましょう！');
       break;
-    case '青':
-      clearBlue.classList.add('trueBlue');
-      coverBlue.classList.add('coverBlue');
+    case 7:
+      $('h2, span, #textBox, #color-btn').css('display', 'none');
+      $('p').css('display', 'inline');
       break;
-    case '藍':
-      clearIndigo.classList.add('trueIndigo');
-      coverIndigo.classList.add('coverIndigo');
-      break;
-    case '紫':
-      clearPurple.classList.add('truePurple');
-      coverPurple.classList.add('coverPurple');
-      break;
-  }
-}
-
-  //タイマー機能用の変数を宣言
-  let time = 60;
-
-  //テキストボックスの内容を取得
-  let text = document.forms.colorForm.textBox.value;
-  //テキストボックスを空にする
-  let textLog = document.forms.colorForm.textBox;
-  textLog.value = '';  
-  console.log(text);//確認用：入力内容を表示
-
-  //入力内容が空の場合、エラーメッセージを表示
-  if (text.trim() === '') {
-    message.textContent = ('何か入力してください');
-    return;
+    }
   }
 
-  //近しい表現での入力を正解扱いにする為、入力内容がnear系の配列に含まれる場合は正解表現に変換する
-  if (nearRed.includes(text)) {
-    text = '赤';
-    console.log('入力内容を赤に変換しました');//確認用
-  }
-  if (nearOrange.includes(text)) {
-    text = '橙';
-    console.log('入力内容を橙に変換しました');//確認用
-  }
-  if (nearYellow.includes(text)) {
-    text = '黄';
-    console.log('入力内容を黄に変換しました');//確認用
-  }
-  if (nearGreen.includes(text)) {
-    text = '緑';
-    console.log('入力内容を緑に変換しました');//確認用
-  }
-  if (nearBlue.includes(text)) {
-    text = '青';
-    console.log('入力内容を青に変換しました');//確認用
-  }
-  if (nearIndigo.includes(text)) {
-    text = '藍';
-    console.log('入力内容を藍に変換しました');//確認用
-  }
-  if (nearPurple.includes(text)) {
-    text = '紫';
-    console.log('入力内容を紫に変換しました');//確認用
-  }
-
-
-  //textPoolと入力内容を比較して、一致するものがあればエラーメッセージ＋入力無効にする
-  if (textPool.includes(text)) {
-    message.textContent = (text + 'は既に解答されています');
-    return;
+  //虹を描画する関数を定義
+  const drawRainbow = () => {
+    //テキストプールに指定色があり、かつid追加済みでない場合にidを追加（無駄に何度も追加しない）
+    if (textPool.includes('赤') && document.getElementById('trueRed') == null) {
+      $('#red').append(`<div id='trueRed'></div>`, `<div id='coverRed'></div>`);
+      $('#trueRed').animate({opacity: 1}, 1000);
+    }
+    if (textPool.includes('橙') && document.getElementById('trueOrange') == null) {
+      $('#orange').append(`<div id='trueOrange'></div>`, `<div id='coverOrange'></div>`);
+      $('#trueOrange').animate({opacity: 1}, 1000);
+    }
+    if (textPool.includes('黄') && document.getElementById('trueYellow') == null) {
+      $('#yellow').append(`<div id='trueYellow'></div>`, `<div id='coverYellow'></div>`);
+      $('#trueYellow').animate({opacity: 1}, 1000);
+    }
+    if (textPool.includes('緑') && document.getElementById('trueGreen') == null) {
+      $('#green').append(`<div id='trueGreen'></div>`, `<div id='coverGreen'></div>`);
+      $('#trueGreen').animate({opacity: 1}, 1000);
+    }
+    if (textPool.includes('青') && document.getElementById('trueBlue') == null) {
+      $('#blue').append(`<div id='trueBlue'></div>`, `<div id='coverBlue'></div>`);
+      $('#trueBlue').animate({opacity: 1}, 1000);
+    }
+    if (textPool.includes('藍') && document.getElementById('trueIndigo') == null) {
+      $('#indigo').append(`<div id='trueIndigo'></div>`, `<div id='coverIndigo'></div>`);
+      $('#trueIndigo').animate({opacity: 1}, 1000);
+    }
+    if (textPool.includes('紫') && document.getElementById('truePurple') == null) {
+      $('#purple').append(`<div id='truePurple'></div>`, `<div id='coverPurple'></div>`);
+      $('#truePurple').animate({opacity: 1}, 1000);
+    }
   }
 
-  //正解内容と入力内容を比較して、一致するものがあればtextPoolに追加。一致しなければ残念メッセージを表示
-  if (answer.includes(text)) {
-    textPool.push(text);
-    //textPoolの要素数をカウントし、7であればゲームクリア演出へ進む。6以下であれば残りの色数を表示＋虹の描画
-    if (textPool.length >= 7) {
-      message.textContent = ('お見事！　虹の七色をすべて答えられました！') ;
-      drowRainbow(text);
-      btn.style.display = 'none';
-      clearMessage.style.display = 'inline';
+//ボタンクリックorエンター入力で発生するイベント処理の中身。入力内容を保存し、テキストボックスを空欄にする
+  const getTextBox = () => {
+    const inputColor = $('[name="textBox"]').val()
+    $('[name="textBox"]').val('');
 
-      //クリア演出。赤と白の文字色変更とタイマーを利用し、点滅させて目立たせる
-      const id = setInterval(() => {
-        time--;
-        console.log(time);//確認用
-        clearMessage.style.color = 'white';
+    if (inputColor.trim() === '') {
+      $('#message').text('何も入力されていません');
+      return;
+    }
 
-        setTimeout(() => {
-          clearMessage.style.color = 'red';
-        }, 500);
-
-        if(time <= 0) {
-          clearInterval(id);
+    //for...in文を用い、colorsオブジェクトのキー名称を定数keyに代入し、プロパティ数と同じ分だけ以降の処理を繰り返す
+    for (const key in colors) {
+      //colorsからkeyに対応した値を抜き出し、入力内容と一致するか確認する（赤→橙→黄→...紫）
+      if (colors[key].includes(inputColor)) {
+        //一致した場合、keyが既にtextPoolに追加されているか確認する。重複チェック。
+        if (textPool.includes(key)) {
+          $('#message').text(`${key}は既に解答されています`);
+          break; //textPool追加済みだった場合、解答済みメッセージを表示し、breakで処理を終える
         }
-      }, 1000);
-    }
-    else {
-      message.textContent = ('正解！　あと'+ (7 - textPool.length) +'色答えたらクリアです！');
-      console.log(textPool);//確認用：textPoolの中身を表示
-      drowRainbow(text);
+        //重複チェックが問題なければkeyをtextPoolに追加し、正解メッセージを表示
+        textPool.push(key);
+        console.log(textPool); //確認用
+        drawRainbow();
+        colorCount();
+        $('#message').text(`正解！ "${key}"は虹の色に含まれます`);
+        break; //繰り返し処理途中で一致した場合、breakで処理を終える
+      } else {
+        $('#message').text(`残念！ "${inputColor}"は虹の色に含まれません`);
+      }
     }
   }
-  else {
-    message.textContent = ('残念…' + text + 'は含まれません');
-  }
+
+  //ボタンクリックでイベント処理開始
+  $('#color-btn').on('click', getTextBox);
+
+  //エンターキー入力でも同様のイベントを開始
+  $('#textBox').on('keydown', function(event) {
+    if(event.key === 'Enter') {
+      getTextBox();
+      return false; //Enterキーが押されると送信処理が発生する為、falseで無効化している
+    }
+  });
 })
